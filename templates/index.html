@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wine Quality Predictor</title>
+    <link href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #8e2de2, #4a00e0);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+            background-color: rgba(0,0,0,0.4);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-label {
+            color: #ffd;
+        }
+        .btn-primary {
+            width: 100%;
+            background-color: #ff4081;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #f50057;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🍷 Wine Quality Predictor</h2>
+        <form method="POST" action="/predict">
+            {% for feature in features %}
+                <div class="mb-3">
+                    <label class="form-label">{{ feature }}</label>
+                    <input type="number" step="any" class="form-control" name="{{ feature }}" required>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        {% if prediction is not none %}
+            <div class="result">
+                Predicted Wine Quality: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
